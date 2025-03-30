@@ -1,0 +1,54 @@
+[project]
+name = "url-shortener-backend"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "authlib>=1.5.1",
+    "boto3>=1.37.22",
+    "channels>=4.2.0",
+    "channels-redis>=4.2.1",
+    "daphne>=4.1.2",
+    "deepl>=1.21.1",
+    "dj-rest-auth>=7.0.1",
+    "django>=5.1.7",
+    "django-annoying>=0.10.7",
+    "django-autoslug>=1.9.9",
+    "django-cleanup>=9.0.0",
+    "django-cors-headers>=4.7.0",
+    "django-debug-toolbar>=5.1.0",
+    "django-filter>=25.1",
+    "django-modeltranslation>=0.19.13",
+    "django-redis>=5.4.0",
+    "django-storages>=1.14.5",
+    "django-tinymce>=4.1.0",
+    "djangorestframework>=3.15.2",
+    "djangorestframework-simplejwt>=5.5.0",
+    "drf-spectacular>=0.28.0",
+    "environs>=14.1.1",
+    "fcm-django>=2.2.1",
+    "fernet>=1.0.1",
+    "mailchecker>=6.0.17",
+    "pillow>=11.1.0",
+    "psycopg2-binary>=2.9.10",
+    "pyotp>=2.9.0",
+    "requests>=2.32.3",
+    "social-auth-app-django>=5.4.3",
+    "whitenoise>=6.9.0",
+]
+
+[dependency-groups]
+dev = [
+    "black>=25.1.0",
+    "isort>=6.0.1",
+    "pre-commit>=4.2.0",
+    "pyright>=1.1.398",
+    "pytest>=8.3.5",
+    "ruff>=0.11.2",
+]
+
+[tool.pyright]
+exclude = [".venv"]
+pythonVersion = "3.12"
+venvPath = "."
+venv = ".venv"

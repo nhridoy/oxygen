@@ -1,0 +1,31 @@
+repos:
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.6.10
+    hooks:
+      - id: uv-lock
+  - repo: https://github.com/psf/black
+    rev: 25.1.0
+    hooks:
+      - id: black
+        language_version: python3.12
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.11.2
+    hooks:
+      - id: ruff
+        args:
+          - --select
+          - I,F401,F841  # I = Import sorting, F401 = Unused imports, F841 = Unused variables
+          - --fix  # Auto-fix issues
+      - id: ruff-format  # Ensures proper formatting
+#  - repo: https://github.com/RobertCraigie/pyright-python
+#    rev: v1.1.398
+#    hooks:
+#      - id: pyright
+#  - repo: local
+#    hooks:
+#      - id: pytest
+#        name: pytest
+#        entry: ./.venv/bin/pytest tests
+#        language: python
+#        pass_filenames: false
+#        always_run: true

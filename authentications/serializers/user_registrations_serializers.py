@@ -1,6 +1,4 @@
-from django.contrib.auth.password_validation import (
-    validate_password as validate_input_password,
-)
+from django.contrib.auth import password_validation
 from django.db import transaction
 from django.utils.translation import gettext as _
 from rest_framework import serializers, validators
@@ -46,17 +44,30 @@ class RegistrationSerializer(serializers.ModelSerializer):
         }
 
     def validate_password(self, value):
-        attrs = self.get_initial()
-
-        if attrs.get("password") != attrs.get("retype_password"):
-            raise serializers.ValidationError("Password fields didn't match.")
-
         # You can add additional password validation here
-        validate_input_password(
-            password=attrs.get("password"),
-            user=User(email=attrs.get("email")),
-        )
+        password_validation.validate_password(password=value, user=None)
 
+        # Check if the password is similar to other user traits
+        initial_data = self.get_initial()
+        username = initial_data.get("username", "")
+        email = initial_data.get("email", "")
+
+        if username and username.lower() in value.lower():
+            raise serializers.ValidationError(
+                _("Password is too similar to the username.")
+            )
+        if email and email.split("@")[0].lower() in value.lower():
+            raise serializers.ValidationError(
+                _("Password is too similar to the email.")
+            )
+        return value
+
+    def validate_retype_password(self, value):
+        """
+        Validate retype password
+        """
+        if value != self.initial_data.get("password"):
+            raise serializers.ValidationError(_("Passwords do not match"))
         return value
 
     @transaction.atomic()

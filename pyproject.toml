@@ -2,7 +2,7 @@
 name = "url-shortener-backend"
 version = "0.1.0"
 description = "Add your description here"
-requires-python = ">=3.12"
+requires-python = ">=3.13.7"
 dependencies = [
     "authlib>=1.5.1",
     "boto3>=1.37.22",
@@ -49,6 +49,6 @@ dev = [
 
 [tool.pyright]
 exclude = [".venv"]
-pythonVersion = "3.12"
+pythonVersion = "3.13.7"
 venvPath = "."
 venv = ".venv"

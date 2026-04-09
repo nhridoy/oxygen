@@ -1,15 +1,19 @@
 from firebase_admin import initialize_app
 
-from .base_settings import PROJECT_NAME
+from .base_settings import PROJECT_NAME, env
 
 # -------------------------------------
 # FIREBASE: Configurations
 # -------------------------------------
-FIREBASE_APP = initialize_app()
+ENABLE_FIREBASE = env.bool("ENABLE_FIREBASE", False)
+FIREBASE_APP = None
+if ENABLE_FIREBASE:
+    FIREBASE_APP = initialize_app()
+
 FCM_DJANGO_SETTINGS = {
     # an instance of firebase_admin.App to be used as default for all fcm-django requests
     # default: None (the default Firebase app)
-    "DEFAULT_FIREBASE_APP": None,
+    "DEFAULT_FIREBASE_APP": FIREBASE_APP,
     # default: _('FCM Django')
     "APP_VERBOSE_NAME": f"[{PROJECT_NAME}]",
     # true if you want to have only one active device per registered user at a time

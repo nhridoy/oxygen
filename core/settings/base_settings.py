@@ -15,10 +15,10 @@ APP_MEDIA_ROOT = BASE_DIR.joinpath("media")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
-PROJECT_NAME = env("PROJECT_NAME")
+PROJECT_NAME = env("PROJECT_NAME", "oxygen")
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = env("SECRET_KEY", "insecure-dev-secret-key")
 
 FERNET_SECRET_KEY = env(
     "FERNET_SECRET_KEY", "bhcTDnLm8eii39PHQ0g34uyDfxiSBIq__YQtPmufkFg="
@@ -27,7 +27,10 @@ FERNET_SECRET_KEY = env(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DEBUG", False)
 
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
+if not DEBUG and SECRET_KEY == "insecure-dev-secret-key":
+    raise RuntimeError("SECRET_KEY must be set when DEBUG is False")
+
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["127.0.0.1", "localhost"])
 
 # Application definition
 
@@ -48,7 +51,6 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "drf_spectacular",
     "fcm_django",  # Firebase Cloud Messaging For push notifications
-    "debug_toolbar",  # django debug toolbar
     "dj_rest_auth",
     "tinymce",
     "django_cleanup.apps.CleanupConfig",
@@ -79,8 +81,11 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "authentications.middleware.LanguageMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",  # debug toolbar
 ]
+
+if DEBUG:
+    INSTALLED_APPS.append("debug_toolbar")
+    MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
 
 ROOT_URLCONF = "core.urls"
 

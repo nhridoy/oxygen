@@ -44,7 +44,25 @@ dev = [
     "pre-commit>=4.2.0",
     "pyright>=1.1.398",
     "pytest>=8.3.5",
+    "pytest-django>=4.10.0",
     "ruff>=0.11.2",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "core.settings"
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-q --tb=short"
+testpaths = [
+    "article",
+    "authentications",
+    "chat",
+    "forum",
+    "options",
+    "payment",
+    "site_settings",
+    "support",
 ]
 
 [tool.pyright]

@@ -16,7 +16,11 @@ echo "Creating Translations"
 python manage.py compilemessages
 
 echo "Creating Superuser"
-python manage.py init
+if [ -n "$SUPERUSER_USERNAME" ] && [ -n "$SUPERUSER_EMAIL" ] && [ -n "$SUPERUSER_PASSWORD" ]; then
+	python manage.py init
+else
+	echo "Skipping superuser initialization (SUPERUSER_USERNAME/SUPERUSER_EMAIL/SUPERUSER_PASSWORD not fully set)."
+fi
 
 # Start server
 echo "Starting server"

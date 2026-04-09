@@ -13,7 +13,8 @@ Interface) both locally and with Docker Compose.
 
 Before getting started, make sure you have the following installed:
 
-- Python (3.10 recommended)
+- Python (3.13.7 recommended)
+- uv
 - Docker
 - Docker Compose
 
@@ -41,10 +42,10 @@ env\Scripts\activate         # On Windows
 
 ### Step 3: Install Dependencies
 
-Install the required Python dependencies using pip:
+Install the required Python dependencies using uv:
 
 ```bash
-pip install -r requirements.txt
+uv sync
 ```
 
 ### Step 4: Run the Django Application
@@ -81,7 +82,7 @@ Use Docker Compose to manage your application services. First, create a new file
 doesn't exist already, and then run the following command:
 
 ```bash
-docker-compose up -d 
+docker-compose up -d
 ```
 
 ### Step 2: Access Your Application
@@ -97,14 +98,13 @@ To deploy your Django application using Docker Compose, follow these steps:
 3. Modify the `docker-compose-example.yml` file as needed (e.g., update environment variables, ports).
 4. Use `docker-compose` to start your application services on the server:
 
-    ```bash
-    docker-compose -f up -d
-    ```
+   ```bash
+   docker-compose up -d
+   ```
 
 5. Ensure that your server's firewall allows traffic on the specified ports.
 6. You can now access your deployed application using the server's IP address or domain name.
 
 ## Notes
 
-...
----
+## ...

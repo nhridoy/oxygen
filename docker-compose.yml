@@ -1,7 +1,7 @@
 services:
   clypt-backend:
     container_name: clypt-backend
-    image: 'ghcr.io/potentialinc/clypt-backend:latest'
+    image: 'ghcr.io/potentialinc/oxygen-backend:${BACKEND_VERSION:-latest}'
     restart: unless-stopped
     volumes:
       - './media:/app/media'

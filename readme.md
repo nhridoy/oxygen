@@ -13,7 +13,7 @@ Interface) both locally and with Docker Compose.
 
 Before getting started, make sure you have the following installed:
 
-- Python (3.13.7 recommended)
+- Python (3.14.7 recommended)
 - uv
 - Docker
 - Docker Compose

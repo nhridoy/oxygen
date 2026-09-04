@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.13.7-alpine
+FROM python:3.14.7-alpine
 
 #add gettext
 RUN apk add --no-cache gettext

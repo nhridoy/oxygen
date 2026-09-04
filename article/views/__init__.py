@@ -8,8 +8,8 @@ from .home_views import HomePageView
 
 __all__ = [
     "ArticleCategoryView",
-    "ArticleView",
-    "ArticleLikeView",
     "ArticleCommentView",
+    "ArticleLikeView",
+    "ArticleView",
     "HomePageView",
 ]

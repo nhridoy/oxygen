@@ -8,10 +8,10 @@ from .forum_serializers import (
 )
 
 __all__ = [
-    "TagSerializer",
-    "TagCreateSerializer",
-    "ForumListSerializer",
-    "ForumImageSerializer",
     "ForumCommentsSerializer",
     "ForumDetailSerializer",
+    "ForumImageSerializer",
+    "ForumListSerializer",
+    "TagCreateSerializer",
+    "TagSerializer",
 ]

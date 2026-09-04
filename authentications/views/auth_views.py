@@ -77,7 +77,7 @@ class MyTokenRefreshView(generics.GenericAPIView):
     def _set_cookie(resp, serializer, domain):
         if refresh := serializer.validated_data.get(
             settings.REST_AUTH.get("JWT_AUTH_REFRESH_COOKIE")
-        ):  # noqa
+        ):
             set_jwt_refresh_cookie(
                 resp=resp,
                 refresh_token=refresh,
@@ -87,7 +87,7 @@ class MyTokenRefreshView(generics.GenericAPIView):
             resp=resp,
             access_token=serializer.validated_data.get(
                 settings.REST_AUTH.get("JWT_AUTH_COOKIE")
-            ),  # noqa
+            ),
             domain=domain,
         )
 

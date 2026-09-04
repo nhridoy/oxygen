@@ -1,5 +1,5 @@
 import contextlib
-from typing import Any, Dict, Optional, Union
+from typing import Any
 
 from rest_framework.renderers import JSONRenderer
 
@@ -10,7 +10,7 @@ class CustomJSONRenderer(JSONRenderer):
     Handles both success and error cases, with support for pagination.
     """
 
-    def extract_base_data(self, data: Dict[str, Any]) -> tuple:
+    def extract_base_data(self, data: dict[str, Any]) -> tuple:
         """Extract basic fields from the response data."""
         message = ""
         errors = None
@@ -34,7 +34,7 @@ class CustomJSONRenderer(JSONRenderer):
 
         return message, errors, final_data
 
-    def extract_pagination_data(self, data: Dict[str, Any]) -> tuple:
+    def extract_pagination_data(self, data: dict[str, Any]) -> tuple:
         """Extract pagination-related fields from the response data."""
         links = data.pop("links") if "links" in data else {}
         count = data.pop("count") if "count" in data else 0
@@ -43,7 +43,7 @@ class CustomJSONRenderer(JSONRenderer):
 
         return links, count, total_pages, results
 
-    def extract_error_detail(self, errors: Union[Dict, list, str]) -> Optional[str]:
+    def extract_error_detail(self, errors: dict | list | str) -> str | None:
         """Recursively extract the first 'detail' message from nested structure."""
         if isinstance(errors, dict):
             if "detail" in errors and isinstance(errors["detail"], str):
@@ -60,7 +60,7 @@ class CustomJSONRenderer(JSONRenderer):
 
         return None
 
-    def format_error_message(self, errors: Union[Dict, list, str]) -> Optional[str]:
+    def format_error_message(self, errors: dict | list | str) -> str | None:
         """Extract and format a meaningful error message from different structures."""
         if isinstance(errors, dict):
             for value in errors.values():
@@ -83,7 +83,7 @@ class CustomJSONRenderer(JSONRenderer):
 
         return None
 
-    def get_error_message(self, errors: Union[Dict, list, str]) -> str:
+    def get_error_message(self, errors: dict | list | str) -> str:
         """Get the most appropriate error message from the error data."""
         return (
             self.extract_error_detail(errors) or self.format_error_message(errors) or ""
@@ -91,9 +91,9 @@ class CustomJSONRenderer(JSONRenderer):
 
     def render(
         self,
-        data: Optional[Dict],
-        accepted_media_type: Optional[str] = None,
-        renderer_context: Optional[Dict] = None,
+        data: dict | None,
+        accepted_media_type: str | None = None,
+        renderer_context: dict | None = None,
     ) -> bytes:
         """
         Render the response data into a standardized format.

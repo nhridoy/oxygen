@@ -40,7 +40,6 @@ class EmailSender:
             attachments=self.attachments,
         )
         email.send()
-        return
 
     def templated_email_send(self):
         # subject: str, send_to: list[str], context: dict, template: str, email_from=None):
@@ -63,4 +62,3 @@ class EmailSender:
 
         message.attach_alternative(html_message, "text/html")
         message.send()
-        return

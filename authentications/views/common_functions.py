@@ -168,7 +168,7 @@ def generate_link(user: User, origin: str, route: str, **kwargs) -> str:
 def generate_token(user: User, **kwargs):
     payload = {
         "user": str(user.id),
-        "exp": datetime.datetime.now(datetime.timezone.utc)
+        "exp": datetime.datetime.now(datetime.UTC)
         + datetime.timedelta(seconds=settings.TOKEN_TIMEOUT_SECONDS),
         **kwargs,
     }

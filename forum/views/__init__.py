@@ -1,8 +1,8 @@
 from .forum_views import ForumCommentView, ForumLikeView, ForumViewSets, TagView
 
 __all__ = [
-    "TagView",
+    "ForumCommentView",
     "ForumLikeView",
     "ForumViewSets",
-    "ForumCommentView",
+    "TagView",
 ]

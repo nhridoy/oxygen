@@ -4,8 +4,8 @@ from .notification_views import NotificationView
 from .translator_view import TranslatorView
 
 __all__ = [
-    "InquiryViewSet",
     "InquiryAnswerView",
+    "InquiryViewSet",
     "NoticeViewSet",
     "NotificationView",
     "TranslatorView",

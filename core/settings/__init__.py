@@ -1,15 +1,273 @@
-from .base_settings import *
-from .cors_settings import *
-from .database_settings import *
-from .dj_rest_auth_settings import *
-from .drf_settings import *
-from .drf_spectacular_settings import *
-from .email_settings import *
-from .fcm_django_settings import *
-from .language_settings import *
-from .payment_settings import *
-from .redis_settings import *
-from .sms_settings import *
-from .social_auth_settings import *
-from .storage_settings import *
-from .tinymce_settings import *
+from .base_settings import (
+    ALLOWED_HOSTS,
+    APP_MEDIA_ROOT,
+    APP_STATIC_DIR,
+    APP_STATIC_ROOT,
+    APP_TEMPLATE_DIR,
+    ASGI_APPLICATION,
+    AUTH_PASSWORD_VALIDATORS,
+    AUTH_USER_MODEL,
+    AUTHENTICATION_BACKENDS,
+    BASE_DIR,
+    DEBUG,
+    DEFAULT_AUTO_FIELD,
+    FERNET_SECRET_KEY,
+    INSTALLED_APPS,
+    INTERNAL_IPS,
+    MIDDLEWARE,
+    PROJECT_NAME,
+    ROOT_URLCONF,
+    SECRET_KEY,
+    SECURE_SSL_REDIRECT,
+    TEMPLATES,
+    USE_X_FORWARDED_HOST,
+)
+from .cors_settings import (
+    CORS_ALLOW_CREDENTIALS,
+    CORS_ALLOWED_ORIGINS,
+    CSRF_TRUSTED_ORIGINS,
+)
+from .database_settings import DATABASES
+from .dj_rest_auth_settings import (
+    ACCOUNT_LOGOUT_ON_GET,
+    BLOCKED_MINUTES,
+    DEFAULT_OTP_SECRET,
+    MAX_LOGIN_ATTEMPTS,
+    OTP_EXPIRY,
+    REQUIRED_EMAIL_VERIFICATION,
+    REST_AUTH,
+    SIMPLE_JWT,
+    TOKEN_TIMEOUT_SECONDS,
+)
+from .drf_settings import REST_FRAMEWORK
+from .drf_spectacular_settings import SPECTACULAR_SETTINGS
+from .email_settings import (
+    DEFAULT_FROM_EMAIL,
+    EMAIL_BACKEND,
+    EMAIL_HOST,
+    EMAIL_HOST_PASSWORD,
+    EMAIL_HOST_USER,
+    EMAIL_PORT,
+    EMAIL_USE_SSL,
+    EMAIL_USE_TLS,
+)
+from .fcm_django_settings import ENABLE_FIREBASE, FCM_DJANGO_SETTINGS, FIREBASE_APP
+from .language_settings import (
+    LANGUAGE_CODE,
+    LANGUAGES,
+    LOCALE_PATHS,
+    MODELTRANSLATION_DEFAULT_LANGUAGE,
+    TIME_ZONE,
+    USE_I18N,
+    USE_L10N,
+    USE_TZ,
+    gettext,
+)
+from .payment_settings import (
+    AUTHORIZE_NET_API_LOGIN_ID,
+    AUTHORIZE_NET_TRANSACTION_KEY,
+    AUTHORIZE_NET_TRANSACTION_URL,
+    TOSS_API_URL,
+    TOSS_API_URL_V2,
+    TOSS_CLIENT_KEY,
+    TOSS_SECRET_KEY,
+)
+from .redis_settings import (
+    CACHES,
+    CHANNEL_LAYERS,
+    REDIS_DB,
+    REDIS_HOST,
+    REDIS_PASSWORD,
+    REDIS_PORT,
+)
+from .sms_settings import (
+    BULKSMS_BD_NET_API_KEY,
+    BULKSMS_BD_NET_API_URL,
+    BULKSMS_BD_NET_SENDER_ID,
+    SOLAPI_API_KEY,
+    SOLAPI_API_SECRET,
+    SOLAPI_PHONE_NUMBER,
+)
+from .social_auth_settings import (
+    APPLE_TOKEN_URL,
+    DEEPL_TRANSLATOR_API_KEY,
+    GITHUB_TOKEN_URL,
+    KAKAO_TOKEN_URL,
+    NAVER_TOKEN_URL,
+    SOCIAL_AUTH_APPLE_ID_CLIENT,
+    SOCIAL_AUTH_APPLE_ID_KEY,
+    SOCIAL_AUTH_APPLE_ID_SCOPE,
+    SOCIAL_AUTH_APPLE_ID_SECRET,
+    SOCIAL_AUTH_APPLE_ID_SERVICE,
+    SOCIAL_AUTH_APPLE_ID_TEAM,
+    SOCIAL_AUTH_GITHUB_KEY,
+    SOCIAL_AUTH_GITHUB_SCOPE,
+    SOCIAL_AUTH_GITHUB_SECRET,
+    SOCIAL_AUTH_GOOGLE_OAUTH2_KEY,
+    SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE,
+    SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET,
+    SOCIAL_AUTH_KAKAO_KEY,
+    SOCIAL_AUTH_KAKAO_SCOPE,
+    SOCIAL_AUTH_KAKAO_SECRET,
+    SOCIAL_AUTH_NAVER_KEY,
+    SOCIAL_AUTH_NAVER_SECRET,
+    SOCIAL_AUTH_PIPELINE,
+)
+from .storage_settings import STATIC_URL, USE_S3
+from .tinymce_settings import (
+    TINYMCE_COMPRESSOR,
+    TINYMCE_DEFAULT_CONFIG,
+    TINYMCE_JS_URL,
+    TINYMCE_URL,
+)
+
+try:
+    from .base_settings import SECURE_PROXY_SSL_HEADER
+except ImportError:
+    pass
+
+if USE_S3:
+    from .storage_settings import (
+        AWS_ACCESS_KEY_ID,
+        AWS_CLOUDFRONT_KEY,
+        AWS_LOCATION,
+        AWS_QUERYSTRING_EXPIRE,
+        AWS_S3_CUSTOM_DOMAIN,
+        AWS_S3_OBJECT_PARAMETERS,
+        AWS_S3_REGION_NAME,
+        AWS_SECRET_ACCESS_KEY,
+        AWS_STORAGE_BUCKET_NAME,
+        CLOUDFRONT_KEY_ID,
+        STORAGES,
+    )
+else:
+    from .storage_settings import MEDIA_ROOT, MEDIA_URL, STATIC_ROOT
+
+try:
+    from .social_auth_settings import GOOGLE_TOKEN_URL
+except ImportError:
+    pass
+
+__all__ = [
+    "ALLOWED_HOSTS",
+    "APP_MEDIA_ROOT",
+    "APP_STATIC_DIR",
+    "APP_STATIC_ROOT",
+    "APP_TEMPLATE_DIR",
+    "APPLE_TOKEN_URL",
+    "ASGI_APPLICATION",
+    "AUTH_PASSWORD_VALIDATORS",
+    "AUTH_USER_MODEL",
+    "AUTHENTICATION_BACKENDS",
+    "AUTHORIZE_NET_API_LOGIN_ID",
+    "AUTHORIZE_NET_TRANSACTION_KEY",
+    "AUTHORIZE_NET_TRANSACTION_URL",
+    "AWS_ACCESS_KEY_ID",
+    "AWS_CLOUDFRONT_KEY",
+    "AWS_LOCATION",
+    "AWS_QUERYSTRING_EXPIRE",
+    "AWS_S3_CUSTOM_DOMAIN",
+    "AWS_S3_OBJECT_PARAMETERS",
+    "AWS_S3_REGION_NAME",
+    "AWS_SECRET_ACCESS_KEY",
+    "AWS_STORAGE_BUCKET_NAME",
+    "ACCOUNT_LOGOUT_ON_GET",
+    "BASE_DIR",
+    "BLOCKED_MINUTES",
+    "BULKSMS_BD_NET_API_KEY",
+    "BULKSMS_BD_NET_API_URL",
+    "BULKSMS_BD_NET_SENDER_ID",
+    "CACHES",
+    "CHANNEL_LAYERS",
+    "CLOUDFRONT_KEY_ID",
+    "CORS_ALLOW_CREDENTIALS",
+    "CORS_ALLOWED_ORIGINS",
+    "CSRF_TRUSTED_ORIGINS",
+    "DATABASES",
+    "DEBUG",
+    "DEFAULT_AUTO_FIELD",
+    "DEFAULT_FROM_EMAIL",
+    "DEFAULT_OTP_SECRET",
+    "DEEPL_TRANSLATOR_API_KEY",
+    "EMAIL_BACKEND",
+    "EMAIL_HOST",
+    "EMAIL_HOST_PASSWORD",
+    "EMAIL_HOST_USER",
+    "EMAIL_PORT",
+    "EMAIL_USE_SSL",
+    "EMAIL_USE_TLS",
+    "ENABLE_FIREBASE",
+    "FCM_DJANGO_SETTINGS",
+    "FERNET_SECRET_KEY",
+    "FIREBASE_APP",
+    "GITHUB_TOKEN_URL",
+    "GOOGLE_TOKEN_URL",
+    "INSTALLED_APPS",
+    "INTERNAL_IPS",
+    "KAKAO_TOKEN_URL",
+    "LANGUAGE_CODE",
+    "LANGUAGES",
+    "LOCALE_PATHS",
+    "MAX_LOGIN_ATTEMPTS",
+    "MEDIA_ROOT",
+    "MEDIA_URL",
+    "MIDDLEWARE",
+    "MODELTRANSLATION_DEFAULT_LANGUAGE",
+    "NAVER_TOKEN_URL",
+    "OTP_EXPIRY",
+    "PROJECT_NAME",
+    "REDIS_DB",
+    "REDIS_HOST",
+    "REDIS_PASSWORD",
+    "REDIS_PORT",
+    "REQUIRED_EMAIL_VERIFICATION",
+    "REST_AUTH",
+    "REST_FRAMEWORK",
+    "ROOT_URLCONF",
+    "SECRET_KEY",
+    "SECURE_PROXY_SSL_HEADER",
+    "SECURE_SSL_REDIRECT",
+    "SIMPLE_JWT",
+    "SOCIAL_AUTH_APPLE_ID_CLIENT",
+    "SOCIAL_AUTH_APPLE_ID_KEY",
+    "SOCIAL_AUTH_APPLE_ID_SCOPE",
+    "SOCIAL_AUTH_APPLE_ID_SECRET",
+    "SOCIAL_AUTH_APPLE_ID_SERVICE",
+    "SOCIAL_AUTH_APPLE_ID_TEAM",
+    "SOCIAL_AUTH_GITHUB_KEY",
+    "SOCIAL_AUTH_GITHUB_SECRET",
+    "SOCIAL_AUTH_GITHUB_SCOPE",
+    "SOCIAL_AUTH_GOOGLE_OAUTH2_KEY",
+    "SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE",
+    "SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET",
+    "SOCIAL_AUTH_KAKAO_KEY",
+    "SOCIAL_AUTH_KAKAO_SCOPE",
+    "SOCIAL_AUTH_KAKAO_SECRET",
+    "SOCIAL_AUTH_NAVER_KEY",
+    "SOCIAL_AUTH_NAVER_SECRET",
+    "SOCIAL_AUTH_PIPELINE",
+    "SOLAPI_API_KEY",
+    "SOLAPI_API_SECRET",
+    "SOLAPI_PHONE_NUMBER",
+    "SPECTACULAR_SETTINGS",
+    "STATIC_ROOT",
+    "STATIC_URL",
+    "STORAGES",
+    "TEMPLATES",
+    "TIME_ZONE",
+    "TINYMCE_COMPRESSOR",
+    "TINYMCE_DEFAULT_CONFIG",
+    "TINYMCE_JS_URL",
+    "TINYMCE_URL",
+    "TOKEN_TIMEOUT_SECONDS",
+    "TOSS_API_URL",
+    "TOSS_API_URL_V2",
+    "TOSS_CLIENT_KEY",
+    "TOSS_SECRET_KEY",
+    "USE_I18N",
+    "USE_L10N",
+    "USE_S3",
+    "USE_TZ",
+    "USE_X_FORWARDED_HOST",
+    "gettext",
+]

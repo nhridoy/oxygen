@@ -4,8 +4,8 @@ from .notification_serializers import NotificationSerializers
 from .translator_serializer import TranslatorSerializer
 
 __all__ = [
-    "InquirySerializer",
     "InquiryAnswerSerializer",
+    "InquirySerializer",
     "NoticeSerializer",
     "NotificationSerializers",
     "TranslatorSerializer",

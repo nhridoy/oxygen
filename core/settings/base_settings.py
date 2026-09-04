@@ -107,8 +107,11 @@ TEMPLATES = [
 # AUTHENTICATION:  auth user model
 AUTH_USER_MODEL = "authentications.User"
 
-# WSGI_APPLICATION = "core.wsgi.application" # WSGI Application
-ASGI_APPLICATION = "core.asgi.application"  # To run websockets use ASGI Application
+# WSGI Application
+# WSGI_APPLICATION = "core.wsgi.application"
+
+# To run websockets use ASGI Application
+ASGI_APPLICATION = "core.asgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

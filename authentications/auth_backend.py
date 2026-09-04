@@ -1,7 +1,6 @@
 from datetime import timedelta
 
 from django.conf import settings
-from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
 from django.core.exceptions import ValidationError
 from django.db.models import Q
@@ -10,12 +9,14 @@ from django.utils.translation import gettext as _
 from rest_framework import exceptions
 from rest_framework import request as drf_request
 
-UserModel = get_user_model()
+from authentications.models import User
 
 
 class EmailAuthenticationBackend(ModelBackend):
     def _fail(self, request, message):
-        """Helper to raise the correct exception type based on request source."""
+        """
+        Helper to raise the correct exception type based on request source.
+        """
         if isinstance(request, drf_request.Request):
             raise exceptions.AuthenticationFailed(message)
         raise ValidationError(message)
@@ -25,15 +26,15 @@ class EmailAuthenticationBackend(ModelBackend):
             return
 
         try:
-            user = UserModel.objects.get(
+            user = User.objects.get(
                 Q(email=username)
                 | Q(username=username)
                 | Q(user_information__phone_number=username)
             )
-        except UserModel.DoesNotExist:
+        except User.DoesNotExist:
             # Run the default password hasher once to reduce the timing
             # difference between an existing and a nonexistent user (#20760).
-            UserModel().set_password(password)
+            User().set_password(password)
             self._fail(request, _("No active account found with the given credentials"))
 
         if not self.user_can_authenticate(user):

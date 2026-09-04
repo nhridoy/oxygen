@@ -31,7 +31,7 @@ class JWTAuthMiddleware(BaseMiddleware):
                 scope["user"] = AnonymousUser()
 
                 raise ValueError("Token Expired")
-            except (jwt.InvalidTokenError, KeyError):
+            except jwt.InvalidTokenError, KeyError:
                 scope["user"] = None
                 # Handle invalid tokens or missing user_id in the token
                 raise ValueError("Invalid token")

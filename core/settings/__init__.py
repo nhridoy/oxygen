@@ -1,15 +1,15 @@
-from .base_settings import *  # noqa: F403
-from .cors_settings import *  # noqa: F403
-from .database_settings import *  # noqa: F403
-from .dj_rest_auth_settings import *  # noqa: F403
-from .drf_settings import *  # noqa: F403
-from .drf_spectacular_settings import *  # noqa: F403
-from .email_settings import *  # noqa: F403
-from .fcm_django_settings import *  # noqa: F403
-from .language_settings import *  # noqa: F403
-from .payment_settings import *  # noqa: F403
-from .redis_settings import *  # noqa: F403
-from .sms_settings import *  # noqa: F403
-from .social_auth_settings import *  # noqa: F403
-from .storage_settings import *  # noqa: F403
-from .tinymce_settings import *  # noqa: F403
+from .base_settings import *
+from .cors_settings import *
+from .database_settings import *
+from .dj_rest_auth_settings import *
+from .drf_settings import *
+from .drf_spectacular_settings import *
+from .email_settings import *
+from .fcm_django_settings import *
+from .language_settings import *
+from .payment_settings import *
+from .redis_settings import *
+from .sms_settings import *
+from .social_auth_settings import *
+from .storage_settings import *
+from .tinymce_settings import *

@@ -4,48 +4,48 @@ version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.14.7"
 dependencies = [
-    "authlib>=1.5.1",
-    "boto3>=1.37.22",
-    "channels>=4.2.0",
-    "channels-redis>=4.2.1",
-    "daphne>=4.1.2",
-    "deepl>=1.21.1",
-    "dj-rest-auth>=7.0.1",
-    "django>=5.1.7",
-    "django-annoying>=0.10.7",
+    "authlib>=1.8.0",
+    "boto3>=1.43.88",
+    "channels>=4.3.2",
+    "channels-redis>=4.3.0",
+    "daphne>=4.2.3",
+    "deepl>=1.32.0",
+    "dj-rest-auth>=7.2.0",
+    "django>=6.1.1",
+    "django-annoying>=0.10.8",
     "django-autoslug>=1.9.9",
     "django-cleanup>=9.0.0",
-    "django-cors-headers>=4.7.0",
-    "django-debug-toolbar>=5.1.0",
-    "django-filter>=25.1",
-    "django-modeltranslation>=0.19.13",
-    "django-redis>=5.4.0",
-    "django-storages>=1.14.5",
-    "django-tinymce>=4.1.0",
-    "djangorestframework>=3.15.2",
-    "djangorestframework-simplejwt>=5.5.0",
-    "drf-spectacular>=0.28.0",
-    "environs>=14.1.1",
-    "fcm-django>=2.2.1",
+    "django-cors-headers>=4.9.0",
+    "django-debug-toolbar>=8.0.0",
+    "django-filter>=26.1",
+    "django-modeltranslation>=0.20.4",
+    "django-redis>=7.0.0",
+    "django-storages>=1.14.6",
+    "django-tinymce>=5.0.0",
+    "djangorestframework>=3.18.0",
+    "djangorestframework-simplejwt>=5.5.1",
+    "drf-spectacular>=0.30.0",
+    "environs>=15.2.0",
+    "fcm-django>=3.2.0",
     "fernet>=1.0.1",
-    "mailchecker>=6.0.17",
-    "pillow>=11.1.0",
-    "psycopg[binary]>=3.3.3",
-    "pyotp>=2.9.0",
-    "requests>=2.32.3",
-    "social-auth-app-django>=5.4.3",
-    "whitenoise>=6.9.0",
+    "mailchecker>=6.0.21",
+    "pillow>=12.3.0",
+    "psycopg[binary]>=3.3.5",
+    "pyotp>=2.10.0",
+    "requests>=2.34.2",
+    "social-auth-app-django>=6.0.1",
+    "whitenoise>=6.12.0",
 ]
 
 [dependency-groups]
 dev = [
-    "black>=25.1.0",
-    "isort>=6.0.1",
-    "pre-commit>=4.2.0",
-    "pyright>=1.1.398",
-    "pytest>=8.3.5",
-    "pytest-django>=4.10.0",
-    "ruff>=0.11.2",
+    "black>=26.5.1",
+    "isort>=9.0.1",
+    "pre-commit>=4.6.2",
+    "pyright>=1.1.411",
+    "pytest>=9.1.1",
+    "pytest-django>=4.14.0",
+    "ruff>=0.16.6",
 ]
 
 [tool.pytest.ini_options]
@@ -66,7 +66,7 @@ testpaths = [
 ]
 
 [tool.pyright]
-exclude = [".venv"]
+exclude = [".venv", "**/node_modules", "**/__pycache__", "**/.*"]
 pythonVersion = "3.14.7"
 venvPath = "."
 venv = ".venv"

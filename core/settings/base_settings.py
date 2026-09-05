@@ -17,15 +17,14 @@ APP_MEDIA_ROOT = BASE_DIR.joinpath("media")
 
 PROJECT_NAME = env("PROJECT_NAME", "oxygen")
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("SECRET_KEY", "insecure-dev-secret-key")
-
-FERNET_SECRET_KEY = env(
-    "FERNET_SECRET_KEY", "bhcTDnLm8eii39PHQ0g34uyDfxiSBIq__YQtPmufkFg="
-)  # Encryption Secret Key
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DEBUG", False)
+
+SECRET_KEY = env("SECRET_KEY", "insecure-dev-secret-key" if DEBUG else None)
+
+FERNET_SECRET_KEY = env("FERNET_SECRET_KEY", default=None)
+
+if FERNET_SECRET_KEY is None and not DEBUG:
+    raise RuntimeError("FERNET_SECRET_KEY must be set when DEBUG is False")
 
 if not DEBUG and SECRET_KEY == "insecure-dev-secret-key":
     raise RuntimeError("SECRET_KEY must be set when DEBUG is False")
@@ -80,7 +79,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "authentications.middleware.LanguageMiddleware",
+    "core.middleware.LanguageMiddleware",
 ]
 
 if DEBUG:
@@ -120,12 +119,20 @@ ASGI_APPLICATION = "core.asgi.application"
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+]
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",  # noqa
     },
     {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "OPTIONS": {"min_length": 12},
     },
     {
         "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
@@ -154,9 +161,34 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # -------------------------------------
 INTERNAL_IPS = [
     "127.0.0.1",
+    "10.0.2.2",
 ]
 
 USE_X_FORWARDED_HOST = env.bool("USE_X_FORWARDED_HOST", True)
-SECURE_SSL_REDIRECT = env.bool("SECURE_SSL_REDIRECT", True)
+SECURE_SSL_REDIRECT = env.bool("SECURE_SSL_REDIRECT", not DEBUG)
 if USE_X_FORWARDED_HOST and SECURE_SSL_REDIRECT:
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+FRONTEND_URL = env("FRONTEND_URL", "http://localhost:3000")
+
+SESSION_COOKIE_HTTPONLY = True
+CSRF_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = "Lax"
+CSRF_COOKIE_SAMESITE = "Lax"
+SESSION_COOKIE_AGE = 3600 * 24 * 7
+SESSION_CACHE_ALIAS = "default"
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
+if not DEBUG:
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    X_FRAME_OPTIONS = "DENY"
+else:
+    SECURE_HSTS_SECONDS = 0
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    X_FRAME_OPTIONS = "DENY"

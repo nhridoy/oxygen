@@ -1,3 +1,4 @@
+import uuid
 from io import BytesIO
 
 from django.core.files.base import ContentFile
@@ -5,10 +6,13 @@ from django.db import models
 from django.db.models.fields.files import ImageFieldFile
 from PIL import Image, ImageSequence
 
-from utils.helper import content_file_path
+from utils.helpers import content_file_path
 
 
 class BaseModel(models.Model):
+    id = models.UUIDField(
+        primary_key=True, default=uuid.uuid4, editable=False, verbose_name="ID"
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

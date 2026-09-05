@@ -1,7 +1,7 @@
 import pyotp
 from django.conf import settings
 
-from utils.modules import EmailSender
+from utils.services.email_sender import EmailSender
 
 
 class OTPVerification:

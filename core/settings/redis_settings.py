@@ -15,7 +15,13 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [(REDIS_HOST, REDIS_PORT)],
+            "hosts": [
+                {
+                    "address": (REDIS_HOST, int(REDIS_PORT)),
+                    "password": REDIS_PASSWORD or None,
+                    "db": int(REDIS_DB),
+                }
+            ],
         },
     },
 }
@@ -23,10 +29,15 @@ CHANNEL_LAYERS = {
 # -------------------------------------
 # CACHE envURATION
 # -------------------------------------
+if REDIS_PASSWORD:
+    _redis_location = f"redis://:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}"
+else:
+    _redis_location = f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}"
+
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": f"redis://{REDIS_PASSWORD}{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}",
+        "LOCATION": _redis_location,
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         },

@@ -4,9 +4,9 @@ from .base_settings import PROJECT_NAME, env
 # EMAIL: configurations
 # -------------------------------------
 if env.bool("USE_PRODUCTION_EMAIL", False):
-    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-else:
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+else:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 EMAIL_HOST = env("EMAIL_HOST")
 EMAIL_PORT = env.int("EMAIL_PORT")
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")

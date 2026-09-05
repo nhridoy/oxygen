@@ -22,14 +22,11 @@ def encrypt(data: str) -> str:
 
 
 def decrypt(token: str) -> str:
-    """
-    Take an encrypted string and decrypt it. Return string
-    """
     key = bytes(settings.FERNET_SECRET_KEY, "utf-8")
     try:
         return Fernet(key).decrypt(bytes(token, "utf-8")).decode("utf-8")
-    except InvalidToken:
-        return "Unencrypted String"
+    except InvalidToken as exc:
+        raise ValueError("Invalid encrypted token") from exc
 
 
 def encode_token(payload: dict):

@@ -46,9 +46,15 @@ class CustomPagination(pagination.PageNumberPagination):
             )
 
     def paginate_queryset(self, queryset, request, view=None):
-        """
-        Paginate the queryset, but return all results if a specific query parameter is provided.
-        """
         if "all" in request.query_params:
+            if not request.user.is_authenticated or not (
+                request.user.is_staff or request.user.is_superuser
+            ):
+                from rest_framework.exceptions import PermissionDenied
+
+                raise PermissionDenied("`all` parameter requires staff privileges.")
+            max_limit = 500
+            if queryset.count() > max_limit:
+                queryset = queryset[:max_limit]
             return None
         return super().paginate_queryset(queryset, request, view)

@@ -8,6 +8,10 @@ from core.models import BaseModel, CompressedImageField
 class Tag(BaseModel):
     tag_name = models.CharField(max_length=255, blank=True)
 
+    class Meta:
+        ordering = ["tag_name"]
+        indexes = [models.Index(fields=["tag_name"], name="idx_forum_tag_name")]
+
     def __str__(self):
         return self.tag_name
 
@@ -25,6 +29,14 @@ class Forum(BaseModel):
     tags = models.ManyToManyField(Tag, related_name="forums")
     total_like = models.PositiveIntegerField(default=0, editable=False)
     total_comment = models.PositiveIntegerField(default=0, editable=False)
+
+    class Meta:
+        ordering = ["-created_at"]
+        indexes = [
+            models.Index(fields=["-created_at"]),
+            models.Index(fields=["-total_like"]),
+            models.Index(fields=["slug"]),
+        ]
 
     def __str__(self):
         return self.title
@@ -57,14 +69,19 @@ class ForumComment(BaseModel):
 
     def clean(self):
         errors = {}
-        # Ensure that the parent comment belongs to the same forum
         if self.parent_comment and self.parent_comment.forum_id != self.forum_id:
             errors.setdefault("parent_comment", []).append(
                 "Parent comment must belong to the same forum."
             )
-
         if errors:
             raise ValidationError(errors)
+
+    class Meta:
+        ordering = ["-created_at"]
+        indexes = [
+            models.Index(fields=["forum", "-created_at"]),
+            models.Index(fields=["forum", "parent_comment"]),
+        ]
 
     def get_replies(self):
         return ForumComment.objects.filter(comment=self)
@@ -82,3 +99,6 @@ class ForumLike(BaseModel):
         on_delete=models.PROTECT,
         related_name="forum_likes",
     )
+
+    class Meta:
+        indexes = [models.Index(fields=["forum", "user"])]

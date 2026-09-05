@@ -9,10 +9,17 @@ class Country(BaseModel):
 
     class Meta:
         verbose_name_plural = "Countries"
+        indexes = [
+            models.Index(fields=["country_short"], name="idx_country_short"),
+            models.Index(fields=["country_long"], name="idx_country_long"),
+        ]
 
 
 class Province(BaseModel):
     province_name = models.CharField(max_length=255, blank=True)
+
+    class Meta:
+        indexes = [models.Index(fields=["province_name"], name="idx_province_name")]
 
     def __str__(self):
         return self.province_name
@@ -26,6 +33,10 @@ class City(BaseModel):
 
     class Meta:
         verbose_name_plural = "Cities"
+        indexes = [
+            models.Index(fields=["city_name"], name="idx_city_name"),
+            models.Index(fields=["province", "city_name"], name="idx_city_prov_city"),
+        ]
 
     def __str__(self):
         return f"{self.city_name}, {self.province.province_name}"
@@ -33,3 +44,6 @@ class City(BaseModel):
 
 class Language(BaseModel):
     language_name = models.CharField(max_length=255, blank=True)
+
+    class Meta:
+        indexes = [models.Index(fields=["language_name"], name="idx_lang_name")]

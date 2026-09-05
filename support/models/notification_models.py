@@ -13,5 +13,12 @@ class Notification(BaseModel):
     notification_type = models.CharField(max_length=255)
     is_read = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ["-created_at"]
+        indexes = [
+            models.Index(fields=["user", "-created_at"]),
+            models.Index(fields=["user", "is_read"]),
+        ]
+
     def __str__(self):
         return f"{self.user} - {self.title}"

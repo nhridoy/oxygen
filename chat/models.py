@@ -13,8 +13,12 @@ class ChatSession(BaseModel):
     room_id = models.CharField(max_length=256, unique=True)
     closed_at = models.DateTimeField(null=True, blank=True)
 
+    class Meta:
+        ordering = ["-created_at"]
+        indexes = [models.Index(fields=["-created_at"])]
+
     def __str__(self):
-        return self.id
+        return str(self.room_id)
 
 
 class ChatLog(BaseModel):
@@ -24,6 +28,13 @@ class ChatLog(BaseModel):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
     content = models.CharField(max_length=1024, blank=True)
     is_read = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ["created_at"]
+        indexes = [
+            models.Index(fields=["room", "created_at"]),
+            models.Index(fields=["room", "is_read"]),
+        ]
 
     def __str__(self):
         return str(self.room)

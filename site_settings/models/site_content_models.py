@@ -18,6 +18,13 @@ class Banner(BaseModel):
     link = models.URLField(blank=True, null=True)
     is_published = models.BooleanField(default=True)
 
+    class Meta:
+        ordering = ["-created_at"]
+        indexes = [
+            models.Index(fields=["is_published"]),
+            models.Index(fields=["-created_at"]),
+        ]
+
     def __str__(self):
         return self.short_text
 
@@ -38,3 +45,5 @@ class FAQ(BaseModel):
 
     class Meta:
         verbose_name_plural = "FAQs"
+        ordering = ["-created_at"]
+        indexes = [models.Index(fields=["-created_at"])]

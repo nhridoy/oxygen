@@ -15,3 +15,8 @@ class Page(BaseModel):
     class Meta:
         verbose_name = "Page"
         verbose_name_plural = "Pages"
+        ordering = ["-created_at"]
+        indexes = [
+            models.Index(fields=["slug"]),
+            models.Index(fields=["-created_at"]),
+        ]

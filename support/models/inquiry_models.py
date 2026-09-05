@@ -19,6 +19,7 @@ class Inquiry(BaseModel):
     class Meta:
         verbose_name_plural = "Inquiries"
         ordering = ["-created_at"]
+        indexes = [models.Index(fields=["user", "-created_at"])]
 
 
 class InquiryAnswer(BaseModel):
@@ -29,3 +30,6 @@ class InquiryAnswer(BaseModel):
         Inquiry, on_delete=models.CASCADE, related_name="inquiry_answers"
     )
     answer = models.TextField()
+
+    class Meta:
+        indexes = [models.Index(fields=["inquiry", "-created_at"])]

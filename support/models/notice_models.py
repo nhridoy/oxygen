@@ -11,5 +11,9 @@ class Notice(BaseModel):
     body = models.TextField()
     image = CompressedImageField(quality=75, width=1920, blank=True, null=True)
 
+    class Meta:
+        ordering = ["-created_at"]
+        indexes = [models.Index(fields=["user", "-created_at"])]
+
     def __str__(self):
         return self.title

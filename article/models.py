@@ -15,6 +15,11 @@ class ArticleCategory(BaseModel):
 
     class Meta:
         verbose_name_plural = "Article Categories"
+        ordering = ["-created_at"]
+        indexes = [
+            models.Index(fields=["name"]),
+            models.Index(fields=["-created_at"]),
+        ]
 
     def __str__(self):
         return self.name
@@ -39,6 +44,15 @@ class Article(BaseModel):
     )
     total_like = models.PositiveIntegerField(default=0, editable=False)
     total_comment = models.PositiveIntegerField(default=0, editable=False)
+
+    class Meta:
+        ordering = ["-created_at"]
+        indexes = [
+            models.Index(fields=["-created_at"]),
+            models.Index(fields=["category", "-created_at"]),
+            models.Index(fields=["-total_like"]),
+            models.Index(fields=["slug"]),
+        ]
 
     def __str__(self):
         return self.title
@@ -66,14 +80,19 @@ class ArticleComment(BaseModel):
 
     def clean(self):
         errors = {}
-        # Ensure that the parent comment belongs to the same article
         if self.parent_comment and self.parent_comment.article_id != self.article_id:
             errors.setdefault("parent_comment", []).append(
                 "Parent comment must belong to the same article."
             )
-
         if errors:
             raise ValidationError(errors)
+
+    class Meta:
+        ordering = ["-created_at"]
+        indexes = [
+            models.Index(fields=["article", "-created_at"]),
+            models.Index(fields=["article", "parent_comment"]),
+        ]
 
     def get_replies(self):
         return ArticleComment.objects.filter(comment=self)
@@ -95,6 +114,7 @@ class ArticleLike(BaseModel):
 
     class Meta:
         unique_together = (("article", "user"),)
+        indexes = [models.Index(fields=["article", "user"])]
 
     def __str__(self):
         return f"{self.user.user_information.full_name} like {self.article}"

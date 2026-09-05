@@ -6,7 +6,7 @@ from rest_framework import generics, serializers
 from payment.models import Order
 
 # from order_management.models import Order
-from utils.modules.payment import AuthorizeNet
+from utils.services.payment import AuthorizeNet
 
 
 class MakePaymentSerializers(serializers.Serializer):

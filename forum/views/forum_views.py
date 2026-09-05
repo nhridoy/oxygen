@@ -8,6 +8,7 @@ from rest_framework import (
     viewsets,
 )
 
+from core.permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
 from forum.models import Forum, ForumComment, ForumLike, Tag
 from forum.serializers import (
     ForumCommentsSerializer,
@@ -16,7 +17,6 @@ from forum.serializers import (
     TagCreateSerializer,
     TagSerializer,
 )
-from utils.extensions.permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
 
 
 class TagView(viewsets.ModelViewSet):

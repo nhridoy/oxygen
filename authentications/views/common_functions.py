@@ -13,9 +13,9 @@ from rest_framework_simplejwt.settings import api_settings as jwt_settings
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from authentications.models import User
-from utils.helper import encode_token, encrypt
-from utils.modules import EmailSender
-from utils.modules.sms_sender import SolApiClient
+from utils.helpers import encode_token, encrypt
+from utils.services import EmailSender
+from utils.services.sms_sender import SolApiClient
 
 
 def get_origin(request):

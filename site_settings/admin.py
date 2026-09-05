@@ -1,4 +1,4 @@
-from utils.helper import register_models
+from utils.helpers import register_models
 
 # Register your models here.
 

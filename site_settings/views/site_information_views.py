@@ -1,8 +1,8 @@
 from rest_framework import response, viewsets
 
+from core.permissions import IsAdminOrReadOnly
 from site_settings.models import SiteInformation
 from site_settings.serializers import SiteInformationSerializer
-from utils.extensions.permissions import IsAdminOrReadOnly
 
 
 class SiteInformationViewSet(viewsets.ModelViewSet):

@@ -4,7 +4,7 @@ from pyotp import TOTP
 from rest_framework import serializers
 
 from authentications.models import UserTwoStepVerification
-from utils.helper import encrypt
+from utils.helpers import encrypt
 
 
 class OTPCreateSerializer(serializers.Serializer):

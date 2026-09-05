@@ -1,8 +1,8 @@
 from rest_framework import permissions, viewsets
 
+from core.permissions import IsAdminOrReadOnly
 from support.models import Notice
 from support.serializers import NoticeSerializer
-from utils.extensions.permissions import IsAdminOrReadOnly
 
 
 class NoticeViewSet(viewsets.ModelViewSet):

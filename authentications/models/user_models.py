@@ -11,7 +11,7 @@ from authentications.user_manager import UserManager
 # ========****************========
 from core.models import BaseModel, CompressedImageField
 from core.settings import PROJECT_NAME
-from utils.helper import validate_email
+from utils.helpers import validate_email
 
 
 class User(AbstractBaseUser, PermissionsMixin):

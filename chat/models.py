@@ -2,7 +2,7 @@ from django.db import models
 
 from core import settings
 from core.models import BaseModel
-from utils.helper import content_file_path
+from utils.helpers import content_file_path
 
 
 class ChatSession(BaseModel):

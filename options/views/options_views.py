@@ -1,5 +1,6 @@
 from rest_framework import permissions, response, views, viewsets
 
+from core.permissions import IsAdminOrReadOnly
 from options.models import City, Country, Language, Province
 from options.serializers import (
     CityCreateSerializer,
@@ -8,7 +9,6 @@ from options.serializers import (
     LanguageSerializer,
     ProvinceSerializer,
 )
-from utils.extensions.permissions import IsAdminOrReadOnly
 
 
 class OptionsListView(views.APIView):

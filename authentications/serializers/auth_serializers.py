@@ -11,7 +11,7 @@ from rest_framework import exceptions, generics, serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from authentications.models import User
-from utils.helper import decode_token, decrypt
+from utils.helpers import decode_token, decrypt
 
 
 class LoginSerializer(TokenObtainPairSerializer):

@@ -16,7 +16,7 @@ from rest_framework import (  # noqa
 
 from authentications.models import User, UserTwoStepVerification
 from authentications.serializers import OTPCreateSerializer
-from utils.extensions import validate_query_params
+from core.decorators import validate_query_params
 
 from .common_functions import (
     generate_and_send_otp,

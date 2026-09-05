@@ -24,7 +24,7 @@ from authentications.views.common_functions import (
     get_token,
     send_verification_email,
 )
-from utils.helper import decode_token, decrypt
+from utils.helpers import decode_token, decrypt
 
 
 class RegistrationView(viewsets.GenericViewSet):

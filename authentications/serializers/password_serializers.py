@@ -10,7 +10,7 @@ from jwt import ExpiredSignatureError
 from rest_framework import serializers, validators
 
 from authentications.models import User
-from utils.helper import decode_token, decrypt
+from utils.helpers import decode_token, decrypt
 
 
 class PasswordValidateSerializer(serializers.Serializer):

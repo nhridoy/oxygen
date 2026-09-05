@@ -8,7 +8,7 @@ from authentications.serializers import (
     ChangePasswordSerializer,
     PasswordValidateSerializer,
 )
-from utils.extensions.permissions import IsAuthenticatedAndEmailVerified
+from core.permissions import IsAuthenticatedAndEmailVerified
 
 
 class PasswordViewSet(viewsets.GenericViewSet):

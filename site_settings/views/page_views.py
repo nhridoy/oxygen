@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 
+from core.permissions import IsAdminOrReadOnly
 from site_settings.models import Page
 from site_settings.serializers import PageSerializer
-from utils.extensions.permissions import IsAdminOrReadOnly
 
 
 class PageViewSet(viewsets.ModelViewSet):

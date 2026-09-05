@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 
+from core.permissions import IsAdminOrReadOnly
 from site_settings.models import Banner
 from site_settings.serializers import BannerSerializer
-from utils.extensions.permissions import IsAdminOrReadOnly
 
 
 class BannerViewSet(viewsets.ModelViewSet):

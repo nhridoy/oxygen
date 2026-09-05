@@ -17,7 +17,7 @@ from article.serializers import (
     ArticleDetailSerializer,
     ArticleListSerializer,
 )
-from utils.extensions.permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
+from core.permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
 
 
 class ArticleCategoryView(viewsets.ModelViewSet):

@@ -1,3 +1,3 @@
-from utils.helper import register_models
+from utils.helpers import register_models
 
 register_models(app_name="payment")

@@ -2,7 +2,7 @@ from django.conf import settings
 from rest_framework import permissions, response, viewsets
 
 from payment.serializers import MakePaymentSerializers
-from utils.modules.payment import AuthorizeNet
+from utils.services.payment import AuthorizeNet
 
 
 class MakePaymentViewSet(viewsets.ViewSet):

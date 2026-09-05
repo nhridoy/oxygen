@@ -56,7 +56,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name="Date Joined",
         auto_now_add=True,
     )
-    last_login = models.DateTimeField(auto_now=True)
     failed_login_attempts = models.PositiveIntegerField(
         verbose_name="Failed Login Attempts",
         default=0,
@@ -67,21 +66,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         blank=True,
     )
 
-    # user role
-    is_superuser = models.BooleanField(
-        verbose_name="Superuser Status",
-        default=False,
-        help_text="Designate if the user has superuser status",
-    )
     is_staff = models.BooleanField(
         verbose_name="Staff Status",
         default=False,
         help_text="Designate if the user has staff status",
-    )
-    is_active = models.BooleanField(
-        verbose_name="Active Status",
-        default=True,
-        help_text="Designate if the user has active status",
     )
     is_verified = models.BooleanField(
         verbose_name="Email Verified",

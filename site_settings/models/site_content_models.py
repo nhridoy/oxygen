@@ -19,6 +19,9 @@ class Banner(BaseModel):
     is_published = models.BooleanField(default=True)
 
     class Meta:
+        db_table = "banners"
+        verbose_name = "Banner"
+        verbose_name_plural = "Banners"
         ordering = ["-created_at"]
         indexes = [
             models.Index(fields=["is_published"]),
@@ -44,6 +47,8 @@ class FAQ(BaseModel):
         return self.question
 
     class Meta:
+        db_table = "faqs"
+        verbose_name = "FAQ"
         verbose_name_plural = "FAQs"
         ordering = ["-created_at"]
         indexes = [models.Index(fields=["-created_at"])]

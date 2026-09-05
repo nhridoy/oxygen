@@ -13,6 +13,7 @@ class Page(BaseModel):
         return self.title
 
     class Meta:
+        db_table = "pages"
         verbose_name = "Page"
         verbose_name_plural = "Pages"
         ordering = ["-created_at"]

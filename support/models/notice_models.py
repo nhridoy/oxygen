@@ -12,6 +12,9 @@ class Notice(BaseModel):
     image = CompressedImageField(quality=75, width=1920, blank=True, null=True)
 
     class Meta:
+        db_table = "notices"
+        verbose_name = "Notice"
+        verbose_name_plural = "Notices"
         ordering = ["-created_at"]
         indexes = [models.Index(fields=["user", "-created_at"])]
 

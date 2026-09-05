@@ -14,6 +14,9 @@ class ChatSession(BaseModel):
     closed_at = models.DateTimeField(null=True, blank=True)
 
     class Meta:
+        db_table = "chat_sessions"
+        verbose_name = "Chat Session"
+        verbose_name_plural = "Chat Sessions"
         ordering = ["-created_at"]
         indexes = [models.Index(fields=["-created_at"])]
 
@@ -30,6 +33,9 @@ class ChatLog(BaseModel):
     is_read = models.BooleanField(default=False)
 
     class Meta:
+        db_table = "chat_logs"
+        verbose_name = "Chat Log"
+        verbose_name_plural = "Chat Logs"
         ordering = ["created_at"]
         indexes = [
             models.Index(fields=["room", "created_at"]),
@@ -45,6 +51,11 @@ class ChatImage(BaseModel):
         ChatLog, on_delete=models.CASCADE, related_name="chat_images_log"
     )
     attachment = models.FileField(upload_to=content_file_path)
+
+    class Meta:
+        db_table = "chat_images"
+        verbose_name = "Chat Image"
+        verbose_name_plural = "Chat Images"
 
     def __str__(self):
         return str(self.room)

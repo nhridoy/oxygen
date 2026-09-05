@@ -28,6 +28,9 @@ class SiteInformation(BaseModel):
     slack = models.URLField(blank=True, null=True)
 
     class Meta:
+        db_table = "site_information"
+        verbose_name = "Site Information"
+        verbose_name_plural = "Site Information"
         ordering = ["-created_at"]
         indexes = [models.Index(fields=["-created_at"])]
 

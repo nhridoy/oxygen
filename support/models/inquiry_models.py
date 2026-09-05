@@ -17,6 +17,8 @@ class Inquiry(BaseModel):
         return self.title
 
     class Meta:
+        db_table = "inquiries"
+        verbose_name = "Inquiry"
         verbose_name_plural = "Inquiries"
         ordering = ["-created_at"]
         indexes = [models.Index(fields=["user", "-created_at"])]
@@ -32,4 +34,7 @@ class InquiryAnswer(BaseModel):
     answer = models.TextField()
 
     class Meta:
+        db_table = "inquiry_answers"
+        verbose_name = "Inquiry Answer"
+        verbose_name_plural = "Inquiry Answers"
         indexes = [models.Index(fields=["inquiry", "-created_at"])]

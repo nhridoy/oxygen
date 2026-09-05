@@ -14,6 +14,8 @@ class ArticleCategory(BaseModel):
     description = models.TextField()
 
     class Meta:
+        db_table = "article_categories"
+        verbose_name = "Article Category"
         verbose_name_plural = "Article Categories"
         ordering = ["-created_at"]
         indexes = [
@@ -46,6 +48,9 @@ class Article(BaseModel):
     total_comment = models.PositiveIntegerField(default=0, editable=False)
 
     class Meta:
+        db_table = "articles"
+        verbose_name = "Article"
+        verbose_name_plural = "Articles"
         ordering = ["-created_at"]
         indexes = [
             models.Index(fields=["-created_at"]),
@@ -88,6 +93,9 @@ class ArticleComment(BaseModel):
             raise ValidationError(errors)
 
     class Meta:
+        db_table = "article_comments"
+        verbose_name = "Article Comment"
+        verbose_name_plural = "Article Comments"
         ordering = ["-created_at"]
         indexes = [
             models.Index(fields=["article", "-created_at"]),
@@ -113,6 +121,9 @@ class ArticleLike(BaseModel):
     )
 
     class Meta:
+        db_table = "article_likes"
+        verbose_name = "Article Like"
+        verbose_name_plural = "Article Likes"
         unique_together = (("article", "user"),)
         indexes = [models.Index(fields=["article", "user"])]
 

@@ -99,6 +99,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.email
 
     class Meta:
+        db_table = "users"
+        verbose_name = "User"
+        verbose_name_plural = "Users"
         ordering = ["-date_joined"]
         indexes = [
             models.Index(fields=["-date_joined"]),
@@ -160,6 +163,11 @@ class UserInformation(BaseModel):
         default=False,
     )
 
+    class Meta:
+        db_table = "user_information"
+        verbose_name = "User Information"
+        verbose_name_plural = "User Information"
+
     def __str__(self):
         return f"{self.full_name} - {self.user.email}"
 
@@ -180,6 +188,11 @@ class UserTwoStepVerification(BaseModel):
     secret_key = models.CharField(max_length=255, blank=True, null=True)
     is_active = models.BooleanField(default=False)
     otp_method = models.CharField(choices=OTP_METHOD, max_length=20, default="___")
+
+    class Meta:
+        db_table = "user_two_step_verifications"
+        verbose_name = "User Two Step Verification"
+        verbose_name_plural = "User Two Step Verifications"
 
     def __str__(self):
         return self.user.email

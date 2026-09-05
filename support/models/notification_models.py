@@ -14,6 +14,9 @@ class Notification(BaseModel):
     is_read = models.BooleanField(default=False)
 
     class Meta:
+        db_table = "notifications"
+        verbose_name = "Notification"
+        verbose_name_plural = "Notifications"
         ordering = ["-created_at"]
         indexes = [
             models.Index(fields=["user", "-created_at"]),

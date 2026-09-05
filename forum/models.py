@@ -9,6 +9,9 @@ class Tag(BaseModel):
     tag_name = models.CharField(max_length=255, blank=True)
 
     class Meta:
+        db_table = "forum_tags"
+        verbose_name = "Tag"
+        verbose_name_plural = "Tags"
         ordering = ["tag_name"]
         indexes = [models.Index(fields=["tag_name"], name="idx_forum_tag_name")]
 
@@ -31,6 +34,9 @@ class Forum(BaseModel):
     total_comment = models.PositiveIntegerField(default=0, editable=False)
 
     class Meta:
+        db_table = "forums"
+        verbose_name = "Forum"
+        verbose_name_plural = "Forums"
         ordering = ["-created_at"]
         indexes = [
             models.Index(fields=["-created_at"]),
@@ -45,6 +51,11 @@ class Forum(BaseModel):
 class ForumImage(BaseModel):
     image = CompressedImageField(quality=75, width=1920)
     forum = models.ForeignKey(Forum, on_delete=models.CASCADE, related_name="images")
+
+    class Meta:
+        db_table = "forum_images"
+        verbose_name = "Forum Image"
+        verbose_name_plural = "Forum Images"
 
 
 class ForumComment(BaseModel):
@@ -77,6 +88,9 @@ class ForumComment(BaseModel):
             raise ValidationError(errors)
 
     class Meta:
+        db_table = "forum_comments"
+        verbose_name = "Forum Comment"
+        verbose_name_plural = "Forum Comments"
         ordering = ["-created_at"]
         indexes = [
             models.Index(fields=["forum", "-created_at"]),
@@ -101,4 +115,7 @@ class ForumLike(BaseModel):
     )
 
     class Meta:
+        db_table = "forum_likes"
+        verbose_name = "Forum Like"
+        verbose_name_plural = "Forum Likes"
         indexes = [models.Index(fields=["forum", "user"])]
